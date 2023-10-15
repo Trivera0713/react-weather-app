@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Dateformat from "./Dateformat";
-import WeatherIcon from "./WeatherIcon";
 import "./Weather.css";
+import WeatherIcon from "./WeatherIcon";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -14,7 +14,7 @@ export default function Weather(props) {
       temperature: response.data.temperature.current,
       description: response.data.condition.description,
       feel: response.data.temperature.feels_like,
-      icon: `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
+      icon: response.data.condition.icon,
     });
   }
   if (weatherData.ready) {
@@ -56,7 +56,8 @@ export default function Weather(props) {
             </span>
           </div>
           <div className="col-6">
-            <img src={weatherData.icon}
+            <WeatherIcon
+              code={weatherData.icon}
               alt={weatherData.description}
             />
             <p className="description"> {weatherData.description}</p>
