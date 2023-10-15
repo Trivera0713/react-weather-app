@@ -10,11 +10,13 @@ export default function Weather(props) {
     console.log(response.data);
     setWeatherData({
       ready: true,
-      date: new Date(response.data.time * 1000),
-      temperature: response.data.temperature.current,
-      description: response.data.condition.description,
-      feel: response.data.temperature.feels_like,
-      icon: response.data.condition.icon,
+      date: new Date(response.data.dt * 1000),
+      temperature: response.data.main.temp,
+      description: response.data.weather[0].description,
+      feel: response.data.main.feels_like,
+      icon: response.data.weather[0].icon,
+      high: response.data.main.temp_max,
+      low: response.data.main.temp_min,
     });
   }
   if (weatherData.ready) {
@@ -45,11 +47,11 @@ export default function Weather(props) {
           <Dateformat date={weatherData.date} />{" "}
         </h4>
         <ul className="hi-low">
-          <li> High 63°F</li> |<li>Low 30°</li>
+          <li>{Math.round(weatherData.high)}°</li> |<li>{Math.round(weatherData.low)}°</li>
         </ul>
         <div className="row">
           <div className="col-6">
-            <h2>{Math.round(weatherData.temperature)}</h2>
+            <h2>{Math.round(weatherData.temperature)}°</h2>
             <span className="units">F|C</span>
             <span className="feel">
               Feels like {Math.round(weatherData.feel)}
@@ -66,8 +68,8 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const apiKey = "f68406t3o5c3f2a4369b987ab457dcba";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=${apiKey}&units=imperial`;
+    const apiKey = `445905dadb3d2b0c6f1b916c9d0e3860`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(showWeather);
 
     return "Loading...";
