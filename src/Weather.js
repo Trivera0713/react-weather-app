@@ -41,28 +41,35 @@ export default function Weather(props) {
             </div>
           </div>
         </form>
-        <h1>{props.defaultCity}</h1>
-        <h4>
-          {" "}
-          <Dateformat date={weatherData.date} />{" "}
-        </h4>
-        <ul className="hi-low">
-          <li>{Math.round(weatherData.high)}°</li> |<li>{Math.round(weatherData.low)}°</li>
-        </ul>
-        <div className="row">
-          <div className="col-6">
-            <h2>{Math.round(weatherData.temperature)}°</h2>
-            <span className="units">F|C</span>
-            <span className="feel">
-              Feels like {Math.round(weatherData.feel)}
-            </span>
-          </div>
-          <div className="col-6">
-            <WeatherIcon
-              code={weatherData.icon}
-              alt={weatherData.description}
-            />
-            <p className="description"> {weatherData.description}</p>
+        <div className="container-main">
+          <h1>{props.defaultCity}</h1>
+          <h4>
+            {" "}
+            <Dateformat date={weatherData.date} />{" "}
+          </h4>
+          <div className="row">
+            <div className="col-6">
+              <h2>{Math.round(weatherData.temperature)}°</h2>{" "}
+              <span className="units">F|C</span>
+              <span className="feel">
+                Feels like {Math.round(weatherData.feel)}
+              </span>
+            </div>
+            <div className="col-6">
+              <WeatherIcon
+                code={weatherData.icon}
+                alt={weatherData.description}
+              />
+            </div>
+            <div className="col-6">
+              <ul className="hi-low">
+                <li>{Math.round(weatherData.high)}°</li> |
+                <li>{Math.round(weatherData.low)}°</li>
+              </ul>
+            </div>
+            <div className="col-6">
+              <p className="description"> {weatherData.description}</p>
+            </div>
           </div>
         </div>
       </div>

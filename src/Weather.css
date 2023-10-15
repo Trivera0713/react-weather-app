@@ -1,3 +1,10 @@
+.container-main {
+  max-width: 600px;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+}
+
 .Weather {
   border: 1px solid black;
   padding: 20px;
@@ -16,15 +23,16 @@
 .Weather h4 {
   display: block;
   font-size: 16px;
+  padding-bottom: 20px;
 }
 .Weather h2 {
+  text-align: center;
   font-size: 100px;
-  text-align: left;
   margin: 0 20px;
 }
 .Weather ul.hi-low {
-  margin: 0 20px;
-  padding: 0;
+  padding: 0 90px;
+  margin: 0 auto;
   display: flex;
   justify-content: flex-start;
 }
@@ -39,15 +47,13 @@
   padding: 0;
 }
 .Weather .units {
-  position: relative;
-  top: -100px;
-  left: -105px;
+  float: right;
+  margin-top: -100px;
+  margin-right: 40px;
   font-size: 24px;
-  
 }
 
 .Weather .feel {
-  float: left;
   margin: -10px 20px;
   font-size: 20px;
 }
@@ -58,5 +64,4 @@
   font-weight: bold;
   font-size: 24px;
   text-align: center;
-  margin: -30px;
 }
