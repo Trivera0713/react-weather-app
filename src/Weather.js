@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Dateformat from "./Dateformat";
+import WeatherIcon from "./WeatherIcon";
+import "./Weather.css";
 
-export default function Weather() {
+export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   function showWeather(response) {
     console.log(response.data);
     setWeatherData({
       ready: true,
+      date: new Date(response.data.time * 1000),
       temperature: response.data.temperature.current,
-      city: response.data.name,
       description: response.data.condition.description,
       feel: response.data.temperature.feels_like,
       icon: `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
@@ -36,8 +39,11 @@ export default function Weather() {
             </div>
           </div>
         </form>
-        <h1>{weatherData.city}</h1>
-        <h4>Tuesday October 10</h4>
+        <h1>{props.defaultCity}</h1>
+        <h4>
+          {" "}
+          <Dateformat date={weatherData.date} />{" "}
+        </h4>
         <ul className="hi-low">
           <li> High 63°F</li> |<li>Low 30°</li>
         </ul>
@@ -50,7 +56,9 @@ export default function Weather() {
             </span>
           </div>
           <div className="col-6">
-            <img src={weatherData.icon} alt={weatherData.description} />
+            <img src={weatherData.icon}
+              alt={weatherData.description}
+            />
             <p className="description"> {weatherData.description}</p>
           </div>
         </div>
@@ -58,8 +66,7 @@ export default function Weather() {
     );
   } else {
     const apiKey = "f68406t3o5c3f2a4369b987ab457dcba";
-    let city = "Allentown";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(showWeather);
 
     return "Loading...";
