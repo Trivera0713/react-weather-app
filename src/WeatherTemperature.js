@@ -24,7 +24,6 @@ export default function WeatherTemperature(props) {
             C
           </a>
         </span>
-        <span className="feel">Feels like {Math.round(props.feels_like)}</span>
       </div>
     );
   } else {
@@ -37,7 +36,6 @@ export default function WeatherTemperature(props) {
           </a>
           | C
         </span>
-        <span className="feel">Feels like {Math.round(props.feels_like)}</span>
       </div>
     );
   }
